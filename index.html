@@ -3,46 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Hands on Machine Learning - Aurelien Geron</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        div {
-            margin: 20px;
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #e8e8e8;
+            line-height: 1.6;
+            padding: 40px 20px;
         }
-        h3 {
-            margin: 20px;
-            text-decoration: underline;
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
         }
-        li:hover {
-            color: rgb(4, 129, 255);
-            text-decoration: underline;
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #667eea;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            padding-left: 4px;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px 24px;
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-item:hover::before {
+            left: 100%;
+        }
+
+        .nav-item-title {
+            font-weight: 500;
+            font-size: 1rem;
+            color: #f0f0f0;
+        }
+
+        .nav-item:hover .nav-item-title {
+            color: #ffffff;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .book-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-item {
+                padding: 14px 20px;
+            }
+
+            body {
+                padding: 20px 15px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #7c8ff0 0%, #8c5bb8 100%);
+        }
+
+        /* Loading animation for interactive feel */
+        .nav-item:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
 <body>
-    <h3>Aurelien  Geron - Hands on Machine Learning with Scikit Learn Keras and TensorFlow (2nd edition)</h3>
-    <div id="title">
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/titlepage01.xhtml`">Title Page</li>
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/colophon01.xhtml`">Colophon - 01</li>
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/colophon02.xhtml`">Colophon - 02</li>
-    </div>
-    <div id="main">
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/toc01.xhtml`">Table of content</li>
-    </div>
-    <div id="content">
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/ch01.xhtml`">chapter - 1</li>
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/ch02.xhtml`">chapter - 2</li>
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/ch03.xhtml`">chapter - 3</li>
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/ch04.xhtml`">chapter - 4</li>
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/ch05.xhtml`">chapter - 5</li>
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/ch06.xhtml`">chapter - 6</li>
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/ch07.xhtml`">chapter - 7</li>
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/ch08.xhtml`">chapter - 8</li>
-        <li onclick="window.location.href = `https://npm-shikhar.github.io/contents/ch09.xhtml`">chapter - 9</li>
+    <div class="container">
+        <header class="header">
+            <h1 class="book-title">Hands on Machine Learning</h1>
+            <p class="subtitle">Aurelien Geron · with Scikit Learn, Keras and TensorFlow</p>
+        </header>
+
+        <section class="section" style="animation-delay: 0.2s;">
+            <h2 class="section-title">Front Matter</h2>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/titlepage01.xhtml'">
+                    <span class="nav-item-title">Title Page</span>
+                </li>
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/colophon01.xhtml'">
+                    <span class="nav-item-title">Colophon - 01</span>
+                </li>
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/colophon02.xhtml'">
+                    <span class="nav-item-title">Colophon - 02</span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section" style="animation-delay: 0.4s;">
+            <h2 class="section-title">Getting Started</h2>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/toc01.xhtml'">
+                    <span class="nav-item-title">Table of Contents</span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section" style="animation-delay: 0.6s;">
+            <h2 class="section-title">Chapters</h2>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/ch01.xhtml'">Chapter 1</li>
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/ch02.xhtml'">Chapter 2</li>
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/ch03.xhtml'">Chapter 3</li>
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/ch04.xhtml'">Chapter 4</li>
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/ch05.xhtml'">Chapter 5</li>
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/ch06.xhtml'">Chapter 6</li>
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/ch07.xhtml'">Chapter 7</li>
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/ch08.xhtml'">Chapter 8</li>
+                <li class="nav-item" onclick="window.location.href = 'https://npm-shikhar.github.io/contents/ch09.xhtml'">Chapter 9</li>
+            </ul>
+        </section>
+
+        <footer class="footer">
+            <p>Built with <span class="gradient-text">Claude Code</span></p>
+        </footer>
     </div>
 </body>
 </html>
